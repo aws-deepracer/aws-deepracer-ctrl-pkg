@@ -21,7 +21,7 @@ The ctrl_pkg specifically depends on the following ROS2 packages as build and ex
 1. *deepracer_interfaces_pkg* - This packages contains the custom message and service type definitions used across the AWS DeepRacer core application.
 1. *camera_pkg* - The DeepRacer Camera ROS package creates the *camera_node* which is part of the core AWS DeepRacer application.
 1. *servo_pkg* - The DeepRacer Servo ROS package creates the *servo_node* which is part of the core AWS DeepRacer application.
-1. *inference_pkg* - The DeepRacer Inference ROS package creates the *inference_node* which ** is part of the core AWS DeepRacer application.
+1. *inference_pkg* - The DeepRacer Inference ROS package creates the *inference_node* which is part of the core AWS DeepRacer application.
 1. *model_optimizer_pkg* - The DeepRacer Model Optimizer ROS package creates the *model_optimizer_node* which is part of the core AWS DeepRacer application.
 1. *deepracer_navigation_pkg* - The DeepRacer Navigation ROS package creates the *deepracer_navigation_node* which is part of the core AWS DeepRacer application.
 
@@ -58,7 +58,7 @@ Open up a terminal on the DeepRacer device and run the following commands as roo
 
 1. Build the ctrl_pkg, camera_pkg, servo_pkg, inference_pkg, model_optimizer_pkg, deepracer_navigation_pkg and deepracer_interfaces_pkg:
 
-    cd ~/deepracer_ws && colcon build --packages-select ctrl_pkg camera_pkg servo_pkg inference_pkg model_optimizer_pkg deepracer_navigation_pkg deepracer_interfaces_pkg
+        cd ~/deepracer_ws && colcon build --packages-select ctrl_pkg camera_pkg servo_pkg inference_pkg model_optimizer_pkg deepracer_navigation_pkg deepracer_interfaces_pkg
 
 ## Usage
 
