@@ -145,6 +145,7 @@ The ctrl_node provides the core functionality to manage the different modes of o
 |set_car_cal|SetCalibrationSrv|Service that is called to set the calibration PWM values  [min, mid, max, polarity] for the steering or throttle.|
 |set_car_led|SetLedCtrlSrv|Service that is called to set the tail light LED [red, green, blue] channel PWM values.|
 |get_car_led|GetLedCtrlSrv|Service that is called to get the tail light LED [red, green, blue] channel PWM values.|
+|get_ctrl_modes| GetCtrlModesSrv | Service that is called to get the available modes of operation for vehicle |
 |model_state|ModelStateSrv|Service that is called to execute the load model services in background thread.|
 |autonomous_throttle|NavThrottleSrv|Service that is called to set the scale value to multiply to the throttle during autonomous navigation.|
 |is_model_loading|GetModelLoadingStatusSrv|Service that is called to know if there is load model operation going on right now on the device in autonomous mode.|

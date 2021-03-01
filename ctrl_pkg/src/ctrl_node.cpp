@@ -25,9 +25,11 @@
 #include "deepracer_interfaces_pkg/srv/set_calibration_srv.hpp"
 #include "deepracer_interfaces_pkg/srv/set_led_ctrl_srv.hpp"
 #include "deepracer_interfaces_pkg/srv/get_led_ctrl_srv.hpp"
+#include "deepracer_interfaces_pkg/srv/get_ctrl_modes_srv.hpp"
 
 #include <memory>
 #include <unordered_map>
+#include <vector>
 
 namespace SysCtrl {
     /// Topics and Services names
@@ -53,6 +55,7 @@ namespace SysCtrl {
     const char* SET_LED_SRV = "set_car_led";
     const char* AUTONOMOUS_THROTTLE_SRV = "autonomous_throttle";
     const char* NAV_ACTION_SPACE_SRV = "/deepracer_navigation_pkg/load_action_space";
+    const char* GET_CTRL_MODES_SRV = "get_ctrl_modes";
     const char* SERVO_TOPIC = "servo_msg";
     const char* RAW_PWM_TOPIC = "raw_pwm";
     class CtrlNodeMgr : public rclcpp::Node
@@ -64,6 +67,16 @@ namespace SysCtrl {
         : Node(nodeName), initialized_(false)
         {
             RCLCPP_INFO(this->get_logger(), "%s started", nodeName.c_str());
+
+            vehicleCtrlModesServiceCbGrp_ = this->create_callback_group(rclcpp::callback_group::CallbackGroupType::Reentrant);
+            getVehicleCtrlModesService_ = this->create_service<deepracer_interfaces_pkg::srv::GetCtrlModesSrv>(GET_CTRL_MODES_SRV,
+                                                                                                               std::bind(&SysCtrl::CtrlNodeMgr::getCtrlModesHdl,
+                                                                                                               this,
+                                                                                                               std::placeholders::_1,
+                                                                                                               std::placeholders::_2,
+                                                                                                               std::placeholders::_3),
+                                                                                                               ::rmw_qos_profile_default,
+                                                                                                               vehicleCtrlModesServiceCbGrp_);
 
             vehicleModeServiceCbGrp_ = this->create_callback_group(rclcpp::callback_group::CallbackGroupType::Reentrant);
             setVehicleModeService_ = this->create_service<deepracer_interfaces_pkg::srv::ActiveStateSrv>(VEHICLE_STATE_SRV,
@@ -166,6 +179,25 @@ namespace SysCtrl {
             }
         }
 
+         /// Request handler for getting the number of modes supported by ctrl_pkg
+         void getCtrlModesHdl(const std::shared_ptr<rmw_request_id_t> request_header,
+                              std::shared_ptr<deepracer_interfaces_pkg::srv::GetCtrlModesSrv::Request> req,
+                              std::shared_ptr<deepracer_interfaces_pkg::srv::GetCtrlModesSrv::Response> res) {
+            (void)request_header; 
+            (void)req;
+            std::vector< int > list;
+            for (int i = manual; i != numStates; i++) {
+                list.push_back(i);
+            }
+            if(res) {
+                res->modes = list;
+                res->error = 0;
+            }
+            else {
+                RCLCPP_ERROR(this->get_logger(), "Result pointer not validated");
+            }
+         }
+
         void waitForServices(){
             videoClientCbGrp_ = this->create_callback_group(rclcpp::CallbackGroupType::Reentrant);
             videoClient_ = this->create_client<deepracer_interfaces_pkg::srv::VideoStateSrv>("/camera_pkg/media_state",
@@ -216,7 +248,7 @@ namespace SysCtrl {
             }
         }
 
-        /// Request handler for chekcing if model is loading.
+        /// Request handler for checking if model is loading.
         void isModelLoadingHdl(const std::shared_ptr<rmw_request_id_t> request_header,
                                std::shared_ptr<deepracer_interfaces_pkg::srv::GetModelLoadingStatusSrv::Request> req,
                                std::shared_ptr<deepracer_interfaces_pkg::srv::GetModelLoadingStatusSrv::Response> res) {
@@ -374,6 +406,8 @@ namespace SysCtrl {
         rclcpp::callback_group::CallbackGroup::SharedPtr videoClientCbGrp_;
         /// ROS service client to activate the camera node to start publishing images.
         rclcpp::Client<deepracer_interfaces_pkg::srv::VideoStateSrv>::SharedPtr videoClient_;
+        rclcpp::callback_group::CallbackGroup::SharedPtr vehicleCtrlModesServiceCbGrp_;
+        rclcpp::Service<deepracer_interfaces_pkg::srv::GetCtrlModesSrv>::SharedPtr getVehicleCtrlModesService_;
         rclcpp::callback_group::CallbackGroup::SharedPtr vehicleModeServiceCbGrp_;
         rclcpp::Service<deepracer_interfaces_pkg::srv::ActiveStateSrv>::SharedPtr setVehicleModeService_;
         rclcpp::callback_group::CallbackGroup::SharedPtr activateVehicleServiceCbGrp_;
