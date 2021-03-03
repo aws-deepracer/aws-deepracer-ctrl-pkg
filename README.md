@@ -53,12 +53,12 @@ Open up a terminal on the DeepRacer device and run the following commands as roo
 
 1. Resolve the ctrl_pkg dependencies:
 
-        cd ~/deepracer_ws && apt-get update
+        cd ~/deepracer_ws/aws-deepracer-ctrl-pkg && apt-get update
         rosdep install -i --from-path . --rosdistro foxy -y
 
 1. Build the ctrl_pkg, camera_pkg, servo_pkg, inference_pkg, model_optimizer_pkg, deepracer_navigation_pkg and deepracer_interfaces_pkg:
 
-        cd ~/deepracer_ws && colcon build --packages-select ctrl_pkg camera_pkg servo_pkg inference_pkg model_optimizer_pkg deepracer_navigation_pkg deepracer_interfaces_pkg
+        cd ~/deepracer_ws/aws-deepracer-ctrl-pkg && colcon build --packages-select ctrl_pkg camera_pkg servo_pkg inference_pkg model_optimizer_pkg deepracer_navigation_pkg deepracer_interfaces_pkg
 
 ## Usage
 
@@ -68,17 +68,13 @@ The ctrl_node provides basic system level functionality for the AWS DeepRacer ap
 
 To launch the built ctrl_node as root user on the DeepRacer device open up another terminal on the DeepRacer device and run the following commands as root user:
 
-1. Navigate to the deepracer workspace:
-
-        cd ~/deepracer_ws
-
 1. Source the ROS2 Foxy setup bash script:
 
         source /opt/ros/foxy/setup.bash 
 
 1. Source the setup script for the installed packages:
 
-        source ~/deepracer_ws/install/setup.bash  
+        source ~/deepracer_ws/aws-deepracer-ctrl-pkg/install/setup.bash  
 
 1. Launch the ctrl_node using the launch script:
 
