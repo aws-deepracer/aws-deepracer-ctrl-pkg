@@ -2,7 +2,7 @@
 
 ## Overview
 
-The DeepRacer Control ROS package creates the *ctrl_node* which  is part of the core AWS DeepRacer application and will be launched from the deepracer_launcher. More details about the application and the components can be found [here](https://github.com/aws-racer/aws-deepracer-launcher).
+The DeepRacer Control ROS package creates the *ctrl_node* which  is part of the core AWS DeepRacer application and will be launched from the deepracer_launcher. More details about the application and the components can be found [here](https://github.com/awsdeepracer/aws-deepracer-launcher).
 
 This is a main node with services exposed to be used by webserver backend API calls. This node manages the different mode of the device [manual, autonomous, calibration]. It allows us to maintain the device in a single mode at any point of time so that the overlapping functionalities (like servo messages, etc) are not conflicting each other. Also, this can be extended to add more modes as done in the Follow-me sample application.
 
@@ -14,7 +14,7 @@ The source code is released under Apache 2.0 (https://aws.amazon.com/apache-2-0/
 
 ### Prerequisites
 
-The DeepRacer device comes with all the pre-requisite packages and libraries installed to run the ctrl_pkg. More details about pre installed set of packages and libraries on the DeepRacer, and installing required build systems can be found in the [Getting Started](https://github.com/aws-racer/aws-deepracer-launcher/blob/main/getting-started.md) section of the AWS DeepRacer Opensource page.
+The DeepRacer device comes with all the pre-requisite packages and libraries installed to run the ctrl_pkg. More details about pre installed set of packages and libraries on the DeepRacer, and installing required build systems can be found in the [Getting Started](https://github.com/awsdeepracer/aws-deepracer-launcher/blob/main/getting-started.md) section of the AWS DeepRacer Opensource page.
 
 The ctrl_pkg specifically depends on the following ROS2 packages as build and execute dependencies:
 
@@ -44,7 +44,7 @@ Open up a terminal on the DeepRacer device and run the following commands as roo
 
 1. Clone the ctrl_pkg on the DeepRacer device:
 
-        git clone https://github.com/aws-racer/aws-deepracer-ctrl-pkg.git
+        git clone https://github.com/awsdeepracer/aws-deepracer-ctrl-pkg.git
 
 1. Fetch unreleased dependencies:
 
