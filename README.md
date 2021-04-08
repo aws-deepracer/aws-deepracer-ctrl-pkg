@@ -4,7 +4,7 @@
 
 The DeepRacer Control ROS package creates the *ctrl_node* which  is part of the core AWS DeepRacer application and will be launched from the deepracer_launcher. More details about the application and the components can be found [here](https://github.com/aws-deepracer/aws-deepracer-launcher).
 
-This is a main node with services exposed to be used by webserver backend API calls. This node manages the different mode of the device [manual, autonomous, calibration]. It allows us to maintain the device in a single mode at any point of time so that the overlapping functionalities (like servo messages, etc) are not conflicting each other. Also, this can be extended to add more modes as done in the Follow-me sample application.
+This is a main node with services exposed to be used by webserver backend API calls. This node manages the different mode of the device [manual, autonomous, calibration]. It allows us to maintain the device in a single mode at any point of time so that the overlapping functionalities (like servo messages, etc) are not conflicting each other. Also, this can be extended to add more modes as done in the Follow the Leader sample application.
 
 ## License
 
