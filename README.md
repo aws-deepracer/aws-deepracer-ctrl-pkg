@@ -15,11 +15,11 @@ Follow these steps to install the AWS DeepRacer control ROS package.
 
 ### Prerequisites
 
-The AWS DeepRacer device comes with all the prerequisite packages and libraries installed to run the `ctrl_pkg`. For more information about the pre-installed set of packages and libraries on the AWS DeepRacer, and about installing the required build systems, see [Getting started with AWS DeepRacer OpenSource](https://github.com/aws-deepracer/aws-deepracer-launcher/blob/main/getting-started.md).
+The AWS DeepRacer device comes with all the prerequisite packages and libraries installed to run the `ctrl_pkg`. For more information about the preinstalled set of packages and libraries on the AWS DeepRacer, and about installing the required build systems, see [Getting started with AWS DeepRacer OpenSource](https://github.com/aws-deepracer/aws-deepracer-launcher/blob/main/getting-started.md).
 
-The `ctrl_pkg` specifically depends on the following ROS 2 packages as build and execute dependencies:
+The `ctrl_pkg` specifically depends on the following ROS 2 packages as build and run dependencies:
 
-1. `deepracer_interfaces_pkg`: This packages contains the custom message and service type definitions used across the AWS DeepRacer core application.
+1. `deepracer_interfaces_pkg`: This package contains the custom message and service-type definitions used across the AWS DeepRacer core application.
 1. `camera_pkg`: The AWS DeepRacer camera ROS package creates the `camera_node`, which is part of the core AWS DeepRacer application.
 1. `servo_pkg`: The AWS DeepRacer servo ROS package creates the `servo_node`, which is part of the core AWS DeepRacer application.
 1. `inference_pkg`: The AWS DeepRacer inference ROS package creates the `inference_node`, which is part of the core AWS DeepRacer application.
